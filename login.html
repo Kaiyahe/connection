@@ -134,6 +134,19 @@
 
     return false; // Prevent form submission
 }
+function togglePassword() {
+    var passwordField = document.getElementById("password");
+    var toggleIcon = document.querySelector(".toggle-password");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleIcon.textContent = "🙈"; // Change icon to hide mode
+    } else {
+        passwordField.type = "password";
+        toggleIcon.textContent = "👁️"; // Change icon back to show mode
+    }
+}
+
 
     </script>
 
