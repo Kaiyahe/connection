@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        .background-top {
+            width: 100%;
+            height: 200px;
+            background-color: #b2dfb0;
+            border-bottom-left-radius: 50% 50px;
+            border-bottom-right-radius: 50% 50px;
+        }
+
+        .reset-container {
+            background: white;
+            max-width: 90%;
+            width: 320px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: -50px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .input-group .icon {
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        .input-group input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .reset-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .reset-btn:hover {
+            background-color: #3a4db5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Design -->
+    <div class="background-top"></div>
+
+    <!-- Reset Password Form -->
+    <div class="reset-container">
+        <h2>Reset Your Password</h2>
+        <p>Enter your username and new password</p>
+        <form onsubmit="return resetPassword()">
+            <div class="input-group">
+                <span class="icon">👤</span>
+                <input type="text" id="reset-username" placeholder="Username" required>
+            </div>
+        
+            <div class="input-group">
+                <span class="icon">🔒</span>
+                <input type="password" id="new-password" placeholder="New Password" required>
+            </div>
+            <button type="submit" class="reset-btn">RESET PASSWORD</button>
+        </form>
+        
+        <p><a href="login.html">Back to Login</a></p>
+    </div>
+
+    <script>
+        function resetPassword() {
+            const username = document.getElementById("reset-username").value;
+            const newPassword = document.getElementById("new-password").value;
+
+            if (!username || !newPassword) {
+                alert("Please fill in all fields!");
+                return false;
+            }
+
+            // Store new password in local storage (for demo purposes)
+            localStorage.setItem(username + "_password", newPassword);
+            alert("Password reset successful! You can now log in with your new password.");
+            window.location.href = "login.html"; 
+            return false;
+        }
+    </script>
+
+</body>
+</html>

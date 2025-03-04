@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Saving System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2fc;
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background: #e0e4f8;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            flex: 1;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .tab-menu {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab-menu button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background: white;
+            font-weight: bold;
+        }
+        .tab-menu button.active {
+            background: #ccc;
+        }
+        .info-box-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .info-box {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        .green { background: #a8e6a3; }
+        .blue { background: #87bfff; }
+        .pink { background: #f8a2d6; }
+        
+#user-info-details {
+    display: none;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 10;
+    width: max-content;
+}
+
+/* Show details when hovering */
+#user-info-container:hover #user-info-details {
+    display: block;
+}
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a onclick="showHome()">🏠 Home</a></li>
+            <li><a onclick="showAccountInfo()">ℹ️ Account Info</a></li>
+            <li><a onclick="showUserDetails()">👤 User Details</a></li>
+            <li><a onclick="showRecentAds()">📢 Recent Ads</a></li>
+            <li><a href="#" onclick="logout()">🚪 Logout</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="container" id="home-page">
+            <h2>Home Page</h2>
+            <p>How are you doing, welcome!</p>
+            <p>Choose a menu from the left navigation to get started</p>
+            <div class="info-box-container">
+                <div class="container">
+                    <h3>📂 <a href="#" onclick="showAccountInfo()">Account Information</a></h3>
+                    <p>Click account info menu to check your balance, deposit or withdraw money, view account statement.</p>
+                </div>
+                <div class="container" id="user-info-container">
+                    <h3>👤 <a href="#" onclick="showUserDetails()">User's Information</a></h3>
+                    <div id="user-info-container" style="position: relative;">
+                        <p id="user-info-text">HERE are your details</p>
+                        <div id="user-info-details"></div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container" id="account-info-page" style="display: none;">
+            <h2>Savings Account</h2>
+            <div class="tab-menu">
+                <button class="active" onclick="showTab('transactions')">Transactions</button>
+                <button onclick="showTab('account-statement')">Account Statement</button>
+            </div>
+        
+            <div id="transactions">
+                <h3>Transactions</h3>
+                <div class="info-box-container">
+                    <div class="info-box green">B <br> CHECK BALANCE</div>
+                    <div class="info-box blue">W <br> WITHDRAW CASH</div>
+                    <div class="info-box pink">D <br> CASH DEPOSITS</div>
+                    <div class="info-box blue">E <br> EMERGENCY WITHDRAW</div>
+                </div>
+            </div>
+        
+            <div id="account-statement" style="display: none;">
+                <h3>Account Statement</h3>
+                <table border="1" width="100%">
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                    </tr>
+                    <tr>
+                        <td>2024-03-01</td>
+                        <td>Deposit</td>
+                        <td>+ $500</td>
+                        <td>$1500</td>
+                    </tr>
+                    <tr>
+                        <td>2024-02-25</td>
+                        <td>Withdrawal</td>
+                        <td>- $200</td>
+                        <td>$1000</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="container" id="user-details-page" style="display: none;">
+            <h2>User Details</h2>
+            <form id="user-details-form">
+                <label for="id-number">ID Number:</label>
+                <input type="text" id="id-number" name="id-number"><br><br>
+        
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone"><br><br>
+        
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+        
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob"><br><br>
+        
+                <button type="button" onclick="saveUserDetails()">Save</button>
+            </form>
+        </div>
+        
+        <div class="container" id="recent-ads-page" style="display: none;">
+            <h2>Recent Ads</h2>
+            <p>NO Ads keep on checking!</p>
+        </div>
+    </div>
+    <script>
+        function showHome() {
+    document.getElementById("home-page").style.display = "block";
+    document.getElementById("account-info-page").style.display = "none";
+    document.getElementById("user-details-page").style.display = "none";
+    document.getElementById("recent-ads-page").style.display = "none";
+}
+
+function showAccountInfo() {
+    document.getElementById("home-page").style.display = "none";
+    document.getElementById("account-info-page").style.display = "block"; // ✅ This makes sure it is visible
+    document.getElementById("user-details-page").style.display = "none";
+    document.getElementById("recent-ads-page").style.display = "none";
+}
+
+function showUserDetails() {
+    document.getElementById("home-page").style.display = "none";
+    document.getElementById("account-info-page").style.display = "none";
+    document.getElementById("user-details-page").style.display = "block";
+    document.getElementById("recent-ads-page").style.display = "none";
+}
+
+function showRecentAds() {
+    document.getElementById("home-page").style.display = "none";
+    document.getElementById("account-info-page").style.display = "none";
+    document.getElementById("user-details-page").style.display = "none";
+    document.getElementById("recent-ads-page").style.display = "block";
+}
+
+// ✅ Fix for the Account Info tabs (Transactions / Account Statement)
+function showTab(tabName) {
+    if (tabName === "transactions") {
+        document.getElementById("transactions").style.display = "block";
+        document.getElementById("account-statement").style.display = "none";
+    } else if (tabName === "account-statement") {
+        document.getElementById("transactions").style.display = "none";
+        document.getElementById("account-statement").style.display = "block";
+    }
+}
+// Function to save user details in localStorage
+function saveUserDetails() {
+    const idNumber = document.getElementById("id-number").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const dob = document.getElementById("dob").value;
+
+    // Save data to localStorage
+    localStorage.setItem("userDetails", JSON.stringify({ idNumber, phone, email, dob }));
+
+    // Update Home Page with new details
+    updateUserInfo();
+    alert("User details saved successfully!");
+}
+
+// Function to update User's Information on Home Page
+function updateUserInfo() {
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+    if (userDetails) {
+        document.getElementById("user-info-text").innerHTML = `
+            <strong>ID:</strong> ${userDetails.idNumber} <br>
+            <strong>Phone:</strong> ${userDetails.phone} <br>
+            <strong>Email:</strong> ${userDetails.email} <br>
+            <strong>DOB:</strong> ${userDetails.dob}
+        `;
+    }
+}
+
+// Load saved user details when page loads
+window.onload = updateUserInfo;
+// Function to update User's Information on Home Page
+function updateUserInfo() {
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+    if (userDetails) {
+        document.getElementById("user-info-details").innerHTML = `
+            <strong>ID:</strong> ${userDetails.idNumber} <br>
+            <strong>Phone:</strong> ${userDetails.phone} <br>
+            <strong>Email:</strong> ${userDetails.email} <br>
+            <strong>DOB:</strong> ${userDetails.dob}
+        `;
+    }
+}
+
+// Load saved user details when page loads
+window.onload = updateUserInfo;
+
+
+
+    </script>
+    <script>
+        function checkLogin() {
+            const user = localStorage.getItem("loggedInUser");
+            if (!user) {
+                alert("You must log in first!");
+                window.location.href = "login.html"; // Redirect to login
+            }
+        }
+    
+        window.onload = checkLogin; // Run on page load
+    </script>
+    <script>
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            alert("You have been logged out.");
+            window.location.href = "login.html";
+        }
+    </script>
+    
+    
+    
+</body>
+</html>

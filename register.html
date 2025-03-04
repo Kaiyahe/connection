@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9e9f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        /* Header */
+        .header {
+            background-color: #ccc;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .highlight {
+            background-color: pink;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .sign-in {
+            background-color: #eee;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        /* Instruction Text */
+        .instruction {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        /* Form Box */
+        .form-container {
+            background-color: #b2dfb0;
+            padding: 20px;
+            border-radius: 10px;
+            width: 40%;
+            margin: auto;
+            text-align: left;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .next-btn {
+            background-color: #4c5fd7;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        /* Sign-in Link */
+        .login-link {
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h2><span class="highlight">Create your account</span></h2>
+    </div>
+
+    <p class="instruction">Fill in the registration details below to start saving with us</p>
+
+    <!-- Registration Form -->
+    <div class="form-container">
+        <h3>CREATE LOGIN DETAILS</h3>
+        <form action="register.php" method="POST" onsubmit="return redirectToLogin()">
+            <label>Username</label><br>
+            <input type="text" name="username" placeholder="Enter your username" required> <br>
+        
+            <label>Password</label><br>
+            <input type="password" name="password" placeholder="Enter your password" required> <br>
+        
+            <label>Confirm Password</label><br>
+            <input type="password" name="confirm_password" placeholder="Confirm your password" required> <br>
+            
+            <button type="submit" class="next-btn">Next</button>
+        </form>
+        
+        <br>
+        <button class="sign-in" onclick="redirectToLogin()">Sign in</button>
+    </div>
+
+    <!-- Sign-in Link -->
+    <p class="login-link">
+        Already have an account? <a href="login.html">Click sign-in option at the top to login</a>
+    </p>
+      <footer>
+        <p>Web based Limited. <a href="#">About us, Follow this link</a></p>
+    </footer>
+
+    <script>
+         function redirectToLogin() {
+        alert("Registration successful! Redirecting to login...");
+        window.location.href = "login.html";
+        return false; // Prevent actual form submission (optional for front-end validation)
+    }
+    </script>
+
+</body>
+</html>
